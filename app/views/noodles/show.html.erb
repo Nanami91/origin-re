@@ -1,0 +1,137 @@
+<%= render "shared/header" %>
+
+<%# 商品の概要 %>
+<div class="noodle-show">
+  <div class="noodle-box">
+    <h3 class="name">
+      <%= @noodles.store_name %>
+    </h3>
+    <h1 class="name">
+      <%= "<< #{@noodles.address.prefecture.name} >>" %>
+    </h1>
+    <div class="noodle-img-content">
+      <%= image_tag @noodles.image, class:"noodle-box-img" %>
+    <h3 class="detail-noodles">
+      <%= link_to @noodles.user.nickname, "/users/#{@noodles.user.id}" %>
+    </h3>
+
+    </div>
+    <div class="noodle-price-box">
+      <span class="noodle-price">
+        <%= "¥#{@noodles.price}" %>
+      </span>
+      <span class="noodle-postage">
+        <%= @noodles.star.name %>
+      </span>
+    </div>
+    <div class="noodle-explain-box">
+      <span><%= @noodles.description %></span>
+    </div>
+
+    <%# if current_user.id == @noodles.user_id %>
+      <%#= link_to "ラーメンの編集",  edit_noodle_path, method: :get, class: "noodle-red-btn" %>
+      <p class="or-text">or</p>
+      <%#= link_to "削除", noodle_path(@noodle.id), method: :delete, class:"noodle-destroy" %>
+      <%# else %>
+      <%#= link_to "購入画面に進む", noodle_noodle_purchases_path(@noodle.id), class:"noodle-red-btn"%>
+    <%# end %>
+
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-noodle">店名</th>
+          <td class="detail-value"><%= @noodles.store_name %></td>
+        </tr>
+        <tr>
+          <th class="detail-noodle">Menu</th>
+          <td class="detail-value"><%= @noodles.menu %></td>
+        </tr>
+        <tr>
+          <th class="detail-noodle">ジャンル</th>
+          <td class="detail-value"><%= @noodles.genre %></td>
+        </tr>
+        <tr>
+          <th class="detail-noodle">価格</th>
+          <td class="detail-value">¥ <%= @noodles.price %></td>
+        </tr>
+        <tr>
+          <th class="detail-noodle">オススメ度</th>
+          <td class="detail-value"><%= @noodles.star.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-noodle">食べた日</th>
+          <td class="detail-value"><%= @noodles.eat_date %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="detail-table">
+     <%# if @noodles.id = @address(:noodle_id) %>
+      <%# @noodles.addresses.each do |address| %>
+      <tbody>
+        <tr>
+        <th class="detail-noodle">住所</th>
+          <td class="detail-value">
+            <%= @noodles.address.prefecture.name %>
+            <%= @noodles.address.city %>
+            <%= @noodles.address.home_number %>
+            <%= @noodles.address.building_name %>
+          </td>
+        </tr>
+      </tbody>
+      <%# end %>
+     <%# end %>
+    </table>
+
+    <div class="option">
+      <div class="favorite-btn">
+        <%= image_tag "star2.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り 0</span>
+      </div>
+    </div>
+  </div>
+  <%# /商品の概要 %>
+
+  <div class="comment-box">
+    <%# if user_signed_in?%>
+    <%#= form_with(model: @noodle, local: true) do |f| %>
+      <div class="field">
+      <%#= f.text_area :text, :size=>"60x5"%>
+      </div>
+      <p class="comment-warn">
+        相手のことを考え丁寧なコメントを心がけましょう。
+        <br>
+        不快な言葉遣いなどは利用制限や退会処分となることがあります。
+      </p>
+        <%#= f.submit "コメントする", class: "comment-btn" %>
+        <%#= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"35",height:"40"%>
+    <%# end %>
+    <%# end %>
+  </div>
+
+  <ul class="comments_lists">
+    <p class="comment-index">コメント一覧</p>
+    <li class="comments_list">
+      <%# @noodle.comments.each do |comment| %>
+          <p>
+          <%#= link_to comment.text + "(#{comment.user.nickname})", "/users/#{comment.user.id}", class: :comment_user %>
+        <%# if current_user == comment.user %>
+            <%#= link_to '削除', noodle_comment_path(@noodle, comment), method: :delete, class:"btn_destroy" , data: { confirm: "削除しますか？" } %>
+          </p>
+        <%# end %>
+      <%# end %> 
+    </li>
+  </ul>
+
+  <div class="links">
+    <a href="#" class="change-noodle-btn">
+      ＜ 前の商品
+    </a>
+    <a href="#" class="change-noodle-btn">
+      後ろの商品 ＞
+    </a>
+  </div>
+  <a href="#" class="another-noodle"><%= "#{@noodles.genre}" %>をもっと見る</a>
+</div>
+
+<%= render "shared/footer" %>

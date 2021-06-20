@@ -46,7 +46,7 @@
 
      <% @noodles.each do |noodle| %>
       <li class='list'>
-        <%= link_to noodles_path(noodle.id), method: :get do %>
+        <%= link_to noodle_path(noodle.id), method: :get do %>
         <div class='item-img-content'>
           <%= image_tag noodle.image, class: "item-img" %>
 
