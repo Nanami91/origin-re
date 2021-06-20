@@ -1,7 +1,7 @@
 class Noodle < ApplicationRecord
 
   belongs_to :user
-  has_one :address
+  has_one :address, dependent: :destroy, class_name: "Address"
   has_one_attached :image
 
   with_options presence: true do
