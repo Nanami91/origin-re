@@ -1,6 +1,6 @@
 class NoodlesController < ApplicationController
 
-  before_action :set_noodle, only: [:show, :edit, :update]
+  before_action :set_noodle, only: [:show, :edit, :update, :destroy]
 
   def index
     @noodles = Noodle.all
@@ -32,6 +32,12 @@ class NoodlesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    #@addresses = Address.find(params[:id])
+    @noodle.destroy
+    redirect_to root_path
   end
 
   private

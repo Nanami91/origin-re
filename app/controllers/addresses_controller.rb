@@ -25,12 +25,15 @@ class AddressesController < ApplicationController
   end
 
   def update
-    if address = Address.update(address_params)
+    if @address = Address.update(address_params)
       redirect_to noodle_path
     else
       render :edit
     end
   end
+
+
+
 
   private
 
