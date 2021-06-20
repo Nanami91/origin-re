@@ -1,6 +1,7 @@
 class NoodlesController < ApplicationController
-
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_noodle, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
     @noodles = Noodle.all
@@ -48,6 +49,12 @@ class NoodlesController < ApplicationController
 
   def set_noodle
     @noodle = Noodle.find(params[:id])
+  end
+
+  def move_to_index
+    unless current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
 
