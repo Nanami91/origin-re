@@ -1,5 +1,6 @@
 class NoodlesController < ApplicationController
 
+  before_action :set_noodle, only: [:show, :edit, :update]
 
   def index
     @noodles = Noodle.all
@@ -19,13 +20,29 @@ class NoodlesController < ApplicationController
   end
 
   def show
-    @noodles = Noodle.find(params[:id])
-    #@addresses = @noodle.address
   end
 
+  def edit
+  end
+
+  def update
+    #@noodle = Noodle.update(noodle_params)
+    if @noodle = Noodle.update(noodle_params)
+      redirect_to noodle_path
+    else
+      render :edit
+    end
+  end
+
+  private
 
   def noodle_params
     params.require(:noodle).permit(:image, :store_name, :description, :menu, :genre, :star_id, :prefecture_id, :price, :eat_date).merge(user_id: current_user.id)
   end
+
+  def set_noodle
+    @noodle = Noodle.find(params[:id])
+  end
+
 
 end
