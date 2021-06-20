@@ -18,6 +18,11 @@ class NoodlesController < ApplicationController
     end
   end
 
+  def show
+    @noodles = Noodle.find(params[:id])
+    #@addresses = @noodle.address
+  end
+
 
   def noodle_params
     params.require(:noodle).permit(:image, :store_name, :description, :menu, :genre, :star_id, :prefecture_id, :price, :eat_date).merge(user_id: current_user.id)
