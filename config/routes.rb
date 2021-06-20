@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to:"noodles#index"
-  resources :noodles, only: [:index, :new, :create, :show] do
-    resources :addresses, only: [:index, :new, :create, :show]
+  resources :noodles, only: [:index, :new, :create, :show, :edit, :update] do
+    resources :addresses, only: [:index, :new, :create, :edit, :update]
   end
 end

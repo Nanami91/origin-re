@@ -4,32 +4,33 @@
 <div class="noodle-show">
   <div class="noodle-box">
     <h3 class="name">
-      <%= @noodles.store_name %>
+      <%= @noodle.store_name %>
     </h3>
     <h1 class="name">
-      <%= "<< #{@noodles.address.prefecture.name} >>" %>
+      <%= "<< #{@noodle.address.prefecture.name} >>" %>
     </h1>
     <div class="noodle-img-content">
-      <%= image_tag @noodles.image, class:"noodle-box-img" %>
-    <h3 class="detail-noodles">
-      <%= link_to @noodles.user.nickname, "/users/#{@noodles.user.id}" %>
+      <%= image_tag @noodle.image, class:"noodle-box-img" %>
+    <h3 class="detail-noodle">
+      <%= link_to @noodle.user.nickname, "/users/#{@noodle.user.id}" %>
     </h3>
 
     </div>
     <div class="noodle-price-box">
       <span class="noodle-price">
-        <%= "¥#{@noodles.price}" %>
+        <%= "¥#{@noodle.price}" %>
       </span>
       <span class="noodle-postage">
-        <%= @noodles.star.name %>
+        <%= @noodle.star.name %>
       </span>
     </div>
     <div class="noodle-explain-box">
-      <span><%= @noodles.description %></span>
+      <span><%= @noodle.description %></span>
     </div>
 
-    <%# if current_user.id == @noodles.user_id %>
-      <%#= link_to "ラーメンの編集",  edit_noodle_path, method: :get, class: "noodle-red-btn" %>
+    <%# if current_user.id == @noodle.user_id %>
+      <%= link_to "ラーメンの編集", edit_noodle_path, method: :get, class: "noodle-red-btn" %>
+      <%= link_to "住所の編集", edit_noodle_address_path(@noodle.id), method: :get, class: "noodle-red-btn" %>
       <p class="or-text">or</p>
       <%#= link_to "削除", noodle_path(@noodle.id), method: :delete, class:"noodle-destroy" %>
       <%# else %>
@@ -40,42 +41,42 @@
       <tbody>
         <tr>
           <th class="detail-noodle">店名</th>
-          <td class="detail-value"><%= @noodles.store_name %></td>
+          <td class="detail-value"><%= @noodle.store_name %></td>
         </tr>
         <tr>
           <th class="detail-noodle">Menu</th>
-          <td class="detail-value"><%= @noodles.menu %></td>
+          <td class="detail-value"><%= @noodle.menu %></td>
         </tr>
         <tr>
           <th class="detail-noodle">ジャンル</th>
-          <td class="detail-value"><%= @noodles.genre %></td>
+          <td class="detail-value"><%= @noodle.genre %></td>
         </tr>
         <tr>
           <th class="detail-noodle">価格</th>
-          <td class="detail-value">¥ <%= @noodles.price %></td>
+          <td class="detail-value">¥ <%= @noodle.price %></td>
         </tr>
         <tr>
           <th class="detail-noodle">オススメ度</th>
-          <td class="detail-value"><%= @noodles.star.name %></td>
+          <td class="detail-value"><%= @noodle.star.name %></td>
         </tr>
         <tr>
           <th class="detail-noodle">食べた日</th>
-          <td class="detail-value"><%= @noodles.eat_date %></td>
+          <td class="detail-value"><%= @noodle.eat_date %></td>
         </tr>
       </tbody>
     </table>
 
     <table class="detail-table">
-     <%# if @noodles.id = @address(:noodle_id) %>
-      <%# @noodles.addresses.each do |address| %>
+     <%# if @noodle.id = @address(:noodle_id) %>
+      <%# @noodle.addresses.each do |address| %>
       <tbody>
         <tr>
         <th class="detail-noodle">住所</th>
           <td class="detail-value">
-            <%= @noodles.address.prefecture.name %>
-            <%= @noodles.address.city %>
-            <%= @noodles.address.home_number %>
-            <%= @noodles.address.building_name %>
+            <%= @noodle.address.prefecture.name %>
+            <%= @noodle.address.city %>
+            <%= @noodle.address.home_number %>
+            <%= @noodle.address.building_name %>
           </td>
         </tr>
       </tbody>
@@ -131,7 +132,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-noodle"><%= "#{@noodles.genre}" %>をもっと見る</a>
+  <a href="#" class="another-noodle"><%= "#{@noodle.genre}" %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
