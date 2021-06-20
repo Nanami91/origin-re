@@ -1,0 +1,50 @@
+<%= render "shared/header" %>
+<div class="user-show">
+  <div class="user-box">
+    <div class="user__wrapper">
+      <h2 class="name">
+        <%= "#{@user.nickname}さんの情報"%>
+      </h2>
+
+      <table class="detail-table">
+        <tbody>
+          <tr>
+            <th class="detail-noodle">名前</th>
+            <td class="detail-value"><%= @user.nickname %></td>
+          </tr>
+          <tr>
+            <th class="detail-noodle">プロフィール</th>
+            <td class="detail-value"><%= @user.profile %></td>
+          </tr>          
+        </tbody>
+      </table>
+
+      <h2 class="name">
+        <%= "#{@user.nickname}さんの投稿"%>
+      </h2>
+
+    <ul class='user-item-lists'>
+      <div class="user__card">
+        <% @noodles.each do |noodle| %>
+      <li class='list'>
+        <%= link_to noodle_path(noodle.id), method: :get do %>
+        <div class='item-img-content'>
+          <%= image_tag noodle.image, class: "item-img" %>
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= noodle.store_name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= noodle.price %>円</span>
+          </div>
+        </div>
+        <% end %>
+      </li>
+        <% end %>
+      </div>
+    </ul>
+    </div>
+  </div>
+</div>
+<%= render "shared/footer" %>

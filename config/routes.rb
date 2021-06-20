@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :noodles do
     resources :addresses, only: [:index, :new, :create, :edit, :update]
   end
+  resources :users, only: [:show]
 end

@@ -11,7 +11,7 @@
     </h1>
     <div class="noodle-img-content">
       <%= image_tag @noodle.image, class:"noodle-box-img" %>
-    <h3 class="detail-noodle">
+    <h3 class="detail-noodles">
       <%= link_to @noodle.user.nickname, "/users/#{@noodle.user.id}" %>
     </h3>
 
@@ -28,14 +28,12 @@
       <span><%= @noodle.description %></span>
     </div>
 
-    <%# if current_user.id == @noodle.user_id %>
+    <% if current_user.id == @noodle.user_id %>
       <%= link_to "ラーメンの編集", edit_noodle_path, method: :get, class: "noodle-red-btn" %>
       <%= link_to "店舗住所の編集", edit_noodle_address_path(@noodle.id), method: :get, class: "noodle-red-btn" %>
       <p class="or-text">or</p>
       <%= link_to "削除", noodle_path(@noodle.id), method: :delete, class:"noodle-destroy" %>
-      <%# else %>
-      <%#= link_to "購入画面に進む", noodle_noodle_purchases_path(@noodle.id), class:"noodle-red-btn"%>
-    <%# end %>
+    <% end %>
 
     <table class="detail-table">
       <tbody>
@@ -67,8 +65,6 @@
     </table>
 
     <table class="detail-table">
-     <%# if @noodle.id = @address(:noodle_id) %>
-      <%# @noodle.addresses.each do |address| %>
       <tbody>
         <tr>
         <th class="detail-noodle">住所</th>
@@ -80,8 +76,6 @@
           </td>
         </tr>
       </tbody>
-      <%# end %>
-     <%# end %>
     </table>
 
     <div class="option">
