@@ -2,6 +2,7 @@ class Noodle < ApplicationRecord
 
   belongs_to :user
   has_one :address, dependent: :destroy, class_name: "Address"
+  has_many :comments
   has_one_attached :image
 
   with_options presence: true do
