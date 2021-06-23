@@ -2,12 +2,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable
 
   has_many :noodles
   has_many :comments
 
-  validates :password, format: {with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}\z/, message: "Include both letters and numbers" }
 
   with_options presence: true do
     validates :birth_date
@@ -22,6 +21,9 @@ class User < ApplicationRecord
       validates :last_name_kana
       validates :first_name_kana
     end
+    validates :email
+    validates :password, format: {with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}\z/, message: "Include both letters and numbers" }, on: :create
   end
+
 
 end

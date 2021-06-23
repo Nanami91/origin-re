@@ -28,11 +28,13 @@
       <span><%= @noodle.description %></span>
     </div>
 
-    <% if current_user.id == @noodle.user_id %>
-      <%= link_to "ラーメンの編集", edit_noodle_path, method: :get, class: "noodle-red-btn" %>
-      <%= link_to "店舗住所の編集", edit_noodle_address_path(@noodle.id), method: :get, class: "noodle-red-btn" %>
-      <p class="or-text">or</p>
-      <%= link_to "削除", noodle_path(@noodle.id), method: :delete, class:"noodle-destroy" %>
+    <% if user_signed_in? %>
+      <% if current_user.id == @noodle.user_id %>
+        <%= link_to "ラーメンの編集", edit_noodle_path, method: :get, class: "noodle-red-btn" %>
+        <%= link_to "店舗住所の編集", edit_noodle_address_path(@noodle.id), method: :get, class: "noodle-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", noodle_path(@noodle.id), method: :delete, class:"noodle-destroy" %>
+      <% end %>
     <% end %>
 
     <table class="detail-table">
