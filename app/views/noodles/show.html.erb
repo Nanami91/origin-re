@@ -69,10 +69,17 @@
         <tr>
         <th class="detail-noodle">住所</th>
           <td class="detail-value">
-            <%= @noodle.address.prefecture.name %>
+            <span>〒<%= @noodle.address.post_code %></span>
+            <span>　　<%= @noodle.address.prefecture.name %></span>
             <%= @noodle.address.city %>
             <%= @noodle.address.home_number %>
             <%= @noodle.address.building_name %>
+          </td>
+        </tr>
+        <tr>
+        <th class="detail-noodle">電話番号</th>
+          <td class="detail-value">
+            <%= @noodle.address.phone_number %>
           </td>
         </tr>
       </tbody>
