@@ -29,7 +29,6 @@ class NoodlesController < ApplicationController
   end
 
   def update
-    #@noodle = Noodle.update(noodle_params)
     if @noodle = Noodle.update(noodle_params)
       redirect_to noodle_path
     else
@@ -38,7 +37,6 @@ class NoodlesController < ApplicationController
   end
 
   def destroy
-    #@addresses = Address.find(params[:id])
     @noodle.destroy
     redirect_to root_path
   end
