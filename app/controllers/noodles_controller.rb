@@ -44,7 +44,7 @@ class NoodlesController < ApplicationController
   private
 
   def noodle_params
-    params.require(:noodle).permit(:image, :store_name, :description, :menu, :genre, :star_id, :prefecture_id, :price, :eat_date).merge(user_id: current_user.id)
+    params.require(:noodle).permit(:image, :store_name, :description, :menu, :genre_id, :star_id, :prefecture_id, :price, :eat_date).merge(user_id: current_user.id)
   end
 
   def set_noodle
