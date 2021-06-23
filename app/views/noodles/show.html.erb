@@ -11,7 +11,7 @@
     </h1>
     <div class="noodle-img-content">
       <%= image_tag @noodle.image, class:"noodle-box-img" %>
-    <h3 class="detail-noodle">
+    <h3 class="detail-noodles">
       <%= link_to @noodle.user.nickname, "/users/#{@noodle.user.id}" %>
     </h3>
 
@@ -28,14 +28,14 @@
       <span><%= @noodle.description %></span>
     </div>
 
-    <%# if current_user.id == @noodle.user_id %>
-      <%= link_to "ラーメンの編集", edit_noodle_path, method: :get, class: "noodle-red-btn" %>
-      <%= link_to "住所の編集", edit_noodle_address_path(@noodle.id), method: :get, class: "noodle-red-btn" %>
-      <p class="or-text">or</p>
-      <%#= link_to "削除", noodle_path(@noodle.id), method: :delete, class:"noodle-destroy" %>
-      <%# else %>
-      <%#= link_to "購入画面に進む", noodle_noodle_purchases_path(@noodle.id), class:"noodle-red-btn"%>
-    <%# end %>
+    <% if user_signed_in? %>
+      <% if current_user.id == @noodle.user_id %>
+        <%= link_to "ラーメンの編集", edit_noodle_path, method: :get, class: "noodle-red-btn" %>
+        <%= link_to "店舗住所の編集", edit_noodle_address_path(@noodle.id), method: :get, class: "noodle-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", noodle_path(@noodle.id), method: :delete, class:"noodle-destroy" %>
+      <% end %>
+    <% end %>
 
     <table class="detail-table">
       <tbody>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <th class="detail-noodle">ジャンル</th>
-          <td class="detail-value"><%= @noodle.genre %></td>
+          <td class="detail-value"><%= @noodle.genre.name %></td>
         </tr>
         <tr>
           <th class="detail-noodle">価格</th>
@@ -67,21 +67,24 @@
     </table>
 
     <table class="detail-table">
-     <%# if @noodle.id = @address(:noodle_id) %>
-      <%# @noodle.addresses.each do |address| %>
       <tbody>
         <tr>
         <th class="detail-noodle">住所</th>
           <td class="detail-value">
-            <%= @noodle.address.prefecture.name %>
+            <span>〒<%= @noodle.address.post_code %></span>
+            <span>　　<%= @noodle.address.prefecture.name %></span>
             <%= @noodle.address.city %>
             <%= @noodle.address.home_number %>
             <%= @noodle.address.building_name %>
           </td>
         </tr>
+        <tr>
+        <th class="detail-noodle">電話番号</th>
+          <td class="detail-value">
+            <%= @noodle.address.phone_number %>
+          </td>
+        </tr>
       </tbody>
-      <%# end %>
-     <%# end %>
     </table>
 
     <div class="option">
@@ -94,33 +97,33 @@
   <%# /商品の概要 %>
 
   <div class="comment-box">
-    <%# if user_signed_in?%>
-    <%#= form_with(model: @noodle, local: true) do |f| %>
+    <% if user_signed_in?%>
+    <%= form_with(model: [@noodle, @comment], local: true) do |f| %>
       <div class="field">
-      <%#= f.text_area :text, :size=>"60x5"%>
+      <%= f.text_area :text, :size=>"60x5"%>
       </div>
       <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
         <br>
         不快な言葉遣いなどは利用制限や退会処分となることがあります。
       </p>
-        <%#= f.submit "コメントする", class: "comment-btn" %>
+        <%= f.submit "コメントする", class: "comment-btn" %>
         <%#= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"35",height:"40"%>
-    <%# end %>
-    <%# end %>
+    <% end %>
+    <% end %>
   </div>
 
   <ul class="comments_lists">
     <p class="comment-index">コメント一覧</p>
     <li class="comments_list">
-      <%# @noodle.comments.each do |comment| %>
+      <% @noodle.comments.each do |comment| %>
           <p>
-          <%#= link_to comment.text + "(#{comment.user.nickname})", "/users/#{comment.user.id}", class: :comment_user %>
-        <%# if current_user == comment.user %>
-            <%#= link_to '削除', noodle_comment_path(@noodle, comment), method: :delete, class:"btn_destroy" , data: { confirm: "削除しますか？" } %>
+          <%= link_to comment.text + "(#{comment.user.nickname})", "/users/#{comment.user.id}", class: :comment_user %>
+        <% if current_user == comment.user %>
+            <%= link_to '削除', noodle_comment_path(@noodle, comment), method: :delete, class:"btn_destroy" , data: { confirm: "削除しますか？" } %>
           </p>
-        <%# end %>
-      <%# end %> 
+        <% end %>
+      <% end %> 
     </li>
   </ul>
 
