@@ -46,13 +46,6 @@
         </div>
         <%= f.text_area :menu, class:"items-text", id:"item-info", placeholder:"ラーメンのメニュー（必須）（醤油ラーメン、味玉ラーメンなど）例）全部のせラーメン。" ,rows:"7" ,maxlength:"1000" %>
       </div>
-      <div class="items-explain">
-        <div class="weight-bold-text">
-          ラーメンのジャンル
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.text_area :genre, class:"items-text", id:"item-info", placeholder:"ラーメンのジャンル（必須）（醤油、豚骨、塩、つけ麺など）例）魚介ベースの濃厚つけ麺" ,rows:"7" ,maxlength:"1000" %>
-      </div>
     </div>
     <%# /商品名と商品説明 %>
 
@@ -60,6 +53,11 @@
     <div class="items-detail">
       <div class="weight-bold-text">ラーメンの詳細</div>
       <div class="form">
+        <div class="weight-bold-text">
+          ラーメンのジャンル
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:genre_id, Genre.all, :id, :name, {}, {class:"select-box", id:"ramen-star"}) %>
         <div class="weight-bold-text">
           オススメ度
           <span class="indispensable">必須</span>
