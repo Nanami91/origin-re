@@ -23,5 +23,6 @@ class Noodle < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :star
+  belongs_to :genre
 
 end
